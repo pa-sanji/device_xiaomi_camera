@@ -68,8 +68,11 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
     $(CAMERA_PATH)/sepolicy/camera/private
 
 # Qualcomm Gralloc
-PRODUCT_PACKAGES += \
-     gralloc.qcom
+# The PocoF3Releases sm8250 display HAL provides gralloc.qcom; the alioth trees
+# this ROM builds with (aospa-pipa calcite-865 and AOSPA kona) do not define a
+# module by that name, their gralloc HAL comes from gralloc_cc_defaults in
+# hardware/qcom/display/gralloc. Requiring it here fails the build with
+# "missing gralloc.qcom", so drop it instead of overriding the display HAL.
 
 # RRO Overlays
 PRODUCT_PACKAGES += \
